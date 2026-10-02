@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Football Legacy V4</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eef5ff;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.side{position:fixed;width:225px;height:100%;background:#091a2b;padding:18px 10px;border-right:1px solid #1c3852;overflow:auto}
+.logo{font-size:21px;font-weight:800;margin:8px}.logo small{display:block;color:#4da3ff;font-size:10px;margin-top:4px}
+.nav-title{font-size:10px;color:#668199;margin:20px 9px 6px;text-transform:uppercase}
+.nav button{display:block;width:100%;border:0;background:none;color:#cbd8e5;text-align:left;padding:11px;border-radius:8px;margin:3px 0;font-size:14px}.nav button.active,.nav button:hover{background:#087cf0;color:#fff}
+.main{margin-left:225px;padding:22px;max-width:1450px}.top{display:flex;justify-content:space-between;align-items:center}.user{padding:9px 12px;background:#0b1e31;border:1px solid #1c3a55;border-radius:10px}
+.hero{margin:18px 0;padding:28px;min-height:230px;border-radius:17px;background:linear-gradient(120deg,#0b2945,#0874bd,#081827);display:flex;align-items:end}.hero h2{font-size:40px;margin:6px 0}
+.muted{color:#91a7bb}.btn{background:#087cf0;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:700}.btn.alt{background:#153d5d}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card,.row,.event,.profile{background:#0b1e31;border:1px solid #1c3a55;border-radius:12px}.card{padding:15px}.big{font-size:27px;font-weight:800}
+.section{display:none}.section.active{display:block}.list{display:grid;gap:9px}.row{padding:12px;display:flex;justify-content:space-between;align-items:center}.badge{background:#153d5d;padding:5px 8px;border-radius:7px;font-size:12px}
+table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #19344c;text-align:left}.event{padding:13px;margin:9px 0;border-left:3px solid #087cf0}.progress{height:8px;background:#173047;border-radius:8px;overflow:hidden}.progress span{display:block;height:100%;background:#087cf0}
+.profile{padding:20px;display:flex;gap:18px;align-items:center}.avatar{width:75px;height:75px;border-radius:50%;background:#153d5d;display:grid;place-items:center;font-size:32px}.statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:15px}.stat{background:#0e2940;padding:12px;border-radius:9px;text-align:center}.stat b{display:block;font-size:20px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:25px}.choice .card{cursor:pointer;transition:.15s}.choice .card:hover{transform:translateY(-3px);border-color:#087cf0}
+.footer{text-align:center;color:#637b92;margin:28px}
+@media(max-width:750px){.side{width:65px}.logo{font-size:0;text-align:center}.logo:first-letter{font-size:24px}.logo small,.nav-title{display:none}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:19px}.main{margin-left:65px;padding:13px}.grid{grid-template-columns:1fr 1fr}.statgrid{grid-template-columns:repeat(3,1fr)}.top{display:block}.user{display:inline-block;margin-top:8px}}
+@media(max-width:480px){.grid,.choice{grid-template-columns:1fr}.hero h2{font-size:31px}.statgrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<aside class="side">
+<div class="logo">⚽ Football Legacy<small>VERSION 4.0</small></div>
+<nav class="nav">
+<div class="nav-title">Carrière</div>
+<button class="active" data-p="accueil">🏠 Accueil</button>
+<button data-p="joueur">👤 Carrière joueur</button>
+<button data-p="entraineur">🧠 Carrière entraîneur</button>
+<div class="nav-title">Joueur</div>
+<button data-p="joueur-matchs">⚽ Mes matchs</button>
+<button data-p="joueur-entrainement">🏋️ Entraînement</button>
+<button data-p="joueur-transfert">💰 Transferts</button>
+<button data-p="joueur-selection">🇫🇷 Équipe nationale</button>
+<div class="nav-title">Entraîneur</div>
+<button data-p="coach-matchs">📋 Matchs</button>
+<button data-p="coach-transferts">🔄 Mercato</button>
+<button data-p="coach-championnat">🏆 Championnat</button>
+<button data-p="coach-trophees">🥇 Trophées</button>
+<button data-p="evenements">📅 Événements</button>
+</nav>
+</aside>
+
+<main class="main">
+<div class="top"><h1 id="title">Football Legacy</h1><div class="user">⚽ Deux modes de carrière</div></div>
+
+<section id="accueil" class="section active">
+<div class="hero"><div><span class="muted">TON HISTOIRE. TON CHOIX.</span><h2>Football Legacy</h2><p>Choisis entre une carrière de joueur ou une carrière d'entraîneur.</p></div></div>
+<div class="choice">
+<div class="card" onclick="go('joueur')"><div class="big">👤 Carrière joueur</div><p>Crée ton joueur, progresse, change de club, gagne des trophées et représente ton pays.</p><button class="btn">Commencer joueur</button></div>
+<div class="card" onclick="go('entraineur')"><div class="big">🧠 Carrière entraîneur</div><p>Gère ton club, les tactiques, les transferts, les matchs et les compétitions.</p><button class="btn">Commencer entraîneur</button></div>
+</div>
+</section>
+
+<section id="joueur" class="section">
+<h2>👤 Carrière joueur</h2>
+<div class="profile"><div class="avatar">⚽</div><div><h2>Malik Duarte</h2><p class="muted">🇲🇦 Maroc · Attaquant · Feyenoord</p><p>Saison 2026/27 · Âge 16 · Niveau 52 · Valeur 4,3 M€</p></div></div>
+<div class="statgrid">
+<div class="stat">Vitesse<b>78</b></div><div class="stat">Tir<b>74</b></div><div class="stat">Passe<b>68</b></div><div class="stat">Dribble<b>81</b></div><div class="stat">Physique<b>63</b></div>
+</div>
+<div class="grid" style="margin-top:15px"><div class="card"><h3>⭐ Potentiel</h3><div class="big">★★★★★</div></div><div class="card"><h3>🎯 Objectif</h3><p>Devenir titulaire</p></div><div class="card"><h3>💶 Valeur</h3><div class="big">4,3 M€</div></div><div class="card"><h3>🇲🇦 Sélection</h3><p>0 sélection</p></div></div>
+</section>
+
+<section id="joueur-matchs" class="section"><h2>⚽ Mes matchs</h2><div class="list" id="pmatches"></div></section>
+<section id="joueur-entrainement" class="section"><h2>🏋️ Entraînement du joueur</h2><div class="grid">
+<div class="card"><h3>⚡ Vitesse</h3><p>Travail explosivité</p><button class="btn" onclick="train('Vitesse')">S'entraîner</button></div>
+<div class="card"><h3>🎯 Finition</h3><p>Tirs et efficacité</p><button class="btn" onclick="train('Finition')">S'entraîner</button></div>
+<div class="card"><h3>🎩 Dribble</h3><p>1 contre 1</p><button class="btn" onclick="train('Dribble')">S'entraîner</button></div>
+<div class="card"><h3>🧠 Mental</h3><p>Confiance et concentration</p><button class="btn" onclick="train('Mental')">S'entraîner</button></div>
+</div></section>
+<section id="joueur-transfert" class="section"><h2>💰 Carrière — Transferts</h2><div class="card"><h3>Clubs intéressés</h3><div class="list" id="offers"></div></div></section>
+<section id="joueur-selection" class="section">
+<h2>🌍 Équipe nationale</h2>
+<div class="grid">
+<div class="card">
+<h3>Choisis ton équipe nationale</h3>
+<p class="muted">Sélectionne le pays que tu veux représenter pendant ta carrière.</p>
+<select id="nationalTeam" style="width:100%;padding:12px;border-radius:8px;border:1px solid #1c3a55;background:#091a2b;color:#fff;font-size:15px;margin:8px 0 12px">
+<option value="🇲🇦|Maroc">🇲🇦 Maroc</option>
+<option value="🇫🇷|France">🇫🇷 France</option>
+<option value="🇩🇿|Algérie">🇩🇿 Algérie</option>
+<option value="🇹🇳|Tunisie">🇹🇳 Tunisie</option>
+<option value="🇸🇳|Sénégal">🇸🇳 Sénégal</option>
+<option value="🇨🇮|Côte d'Ivoire">🇨🇮 Côte d'Ivoire</option>
+<option value="🇳🇬|Nigeria">🇳🇬 Nigeria</option>
+<option value="🇨🇲|Cameroun">🇨🇲 Cameroun</option>
+<option value="🇪🇬|Égypte">🇪🇬 Égypte</option>
+<option value="🇧🇷|Brésil">🇧🇷 Brésil</option>
+<option value="🇦🇷|Argentine">🇦🇷 Argentine</option>
+<option value="🇺🇾|Uruguay">🇺🇾 Uruguay</option>
+<option value="🇨🇴|Colombie">🇨🇴 Colombie</option>
+<option value="🇲🇽|Mexique">🇲🇽 Mexique</option>
+<option value="🇺🇸|États-Unis">🇺🇸 États-Unis</option>
+<option value="🇨🇦|Canada">🇨🇦 Canada</option>
+<option value="🇪🇸|Espagne">🇪🇸 Espagne</option>
+<option value="🇵🇹|Portugal">🇵🇹 Portugal</option>
+<option value="🇬🇧|Angleterre">🏴 Angleterre</option>
+<option value="🇩🇪|Allemagne">🇩🇪 Allemagne</option>
+<option value="🇮🇹|Italie">🇮🇹 Italie</option>
+<option value="🇳🇱|Pays-Bas">🇳🇱 Pays-Bas</option>
+<option value="🇧🇪|Belgique">🇧🇪 Belgique</option>
+<option value="🇹🇷|Turquie">🇹🇷 Turquie</option>
+<option value="🇯🇵|Japon">🇯🇵 Japon</option>
+<option value="🇰🇷|Corée du Sud">🇰🇷 Corée du Sud</option>
+</select>
+<button class="btn" onclick="chooseNationalTeam()">Choisir cette sélection</button>
+</div>
+<div class="card">
+<h3>Sélection actuelle</h3>
+<div class="big" id="selectedTeam">🇲🇦 Maroc</div>
+<p id="selectionMessage">Ton objectif : gagner ta place avec le Maroc.</p>
+</div>
+<div class="card">
+<h3>Réputation internationale</h3>
+<div class="progress"><span style="width:35%"></span></div>
+<p class="muted">35 / 100</p>
+</div>
+</div>
+</section>
+
+<section id="entraineur" class="section">
+<h2>🧠 Carrière entraîneur</h2>
+<div class="profile"><div class="avatar">🧠</div><div><h2>Manager Pro</h2><p class="muted">Paris FC · Ligue 1 · Saison 2026/27</p><p>Note manager : 71 · Budget : 85 M€</p></div></div>
+<div class="grid" style="margin-top:15px"><div class="card"><h3>🎯 Objectif</h3><p>Finir dans le top 4</p></div><div class="card"><h3>💰 Budget</h3><div class="big">85 M€</div></div><div class="card"><h3>📋 Formation</h3><div class="big">4-3-3</div></div><div class="card"><h3>🏆 Trophées</h3><div class="big">3</div></div></div>
+</section>
+
+<section id="coach-matchs" class="section"><h2>📋 Matchs de l'équipe</h2><div class="list" id="cmatches"></div></section>
+<section id="coach-transferts" class="section"><h2>🔄 Mercato entraîneur</h2><div class="card"><h3>Joueurs ciblés</h3><div class="list" id="ctargets"></div></div></section>
+<section id="coach-championnat" class="section"><h2>🏆 Championnat</h2><div class="card"><h3>Ligue 1 — Classement</h3><table><thead><tr><th>#</th><th>Club</th><th>Pts</th></tr></thead><tbody id="ranking"></tbody></table></div></section>
+<section id="coach-trophees" class="section"><h2>🥇 Trophées de l'entraîneur</h2><div class="grid"><div class="card"><h3>🏆 Ligue 1</h3><div class="big">1</div></div><div class="card"><h3>🥇 Coupe nationale</h3><div class="big">1</div></div><div class="card"><h3>🌍 Ligue des Champions</h3><div class="big">1</div></div><div class="card"><h3>⭐ Total</h3><div class="big">3</div></div></div></section>
+<section id="evenements" class="section"><h2>📅 Événements de carrière</h2>
+<div class="event"><b>⭐ Premier contrat professionnel</b><br><span class="muted">Ton aventure commence.</span></div>
+<div class="event"><b>💰 Offre de transfert</b><br><span class="muted">Un club européen suit tes performances.</span></div>
+<div class="event"><b>🇲🇦 Sélection nationale</b><br><span class="muted">Ton travail peut te rapprocher de la sélection.</span></div>
+<div class="event"><b>🏆 Objectif remporté</b><br><span class="muted">Une nouvelle étape dans ta carrière.</span></div>
+</section>
+<div class="footer">⚽ Football Legacy V4 · Carrière joueur + carrière entraîneur + choix de sélection nationale</div>
+</main>
+
+<script>
+const bs=[...document.querySelectorAll('.nav button')],ss=[...document.querySelectorAll('.section')];
+function go(id){ss.forEach(s=>s.classList.toggle('active',s.id===id));bs.forEach(b=>b.classList.toggle('active',b.dataset.p===id));let b=bs.find(x=>x.dataset.p===id);document.getElementById('title').textContent=b?b.textContent.trim():'Football Legacy';scrollTo(0,0)}
+bs.forEach(b=>b.onclick=()=>go(b.dataset.p));
+function rows(data,target){document.getElementById(target).innerHTML=data.map(x=>`<div class="row"><div><b>${x[0]}</b><br><span class="muted">${x[1]}</span></div><span class="badge">${x[2]}</span></div>`).join('')}
+rows([['Feyenoord vs Ajax','Eredivisie · 20 sept. · 20:45','À venir'],['PSV vs Feyenoord','Eredivisie · 27 sept. · 17:00','À venir'],['Feyenoord vs Benfica','Ligue des Champions · 1 oct.','À venir']], 'pmatches');
+rows([['Paris FC vs OM','Ligue 1 · 20 sept. · 20:45','À venir'],['Lyon vs Paris FC','Ligue 1 · 27 sept. · 17:00','À venir'],['Paris FC vs Lille','Ligue 1 · 4 oct. · 21:00','À venir'],['Paris FC vs Manchester City','Ligue des Champions · 21 oct.','À venir']], 'cmatches');
+rows([['A. Doué','42 M€ · Jeune milieu','Cible'],['J. Alvarez','78 M€ · Attaquant','Négociation'],['E. Williams','55 M€ · Ailier','Scouté']], 'ctargets');
+rows([['Manchester City','78 M€ · contrat proposé','Intérêt'],['Arsenal','62 M€ · contrat proposé','Intérêt'],['Milan AC','45 M€ · suivi','Suivi']], 'offers');
+const c=[['Paris FC',9],['Monaco',7],['Marseille',6],['Lille',6],['Lyon',4],['Nice',4],['Rennes',3],['Strasbourg',2]];
+ranking.innerHTML=c.map((x,i)=>`<tr><td>${i+1}</td><td>${x[0]}</td><td>${x[1]}</td></tr>`).join('');
+function train(x){alert('Séance '+x+' terminée ! Ton joueur progresse.')}
+function chooseNationalTeam(){
+ const v=document.getElementById('nationalTeam').value.split('|');
+ const flag=v[0], country=v[1];
+ document.getElementById('selectedTeam').textContent=flag+' '+country;
+ document.getElementById('selectionMessage').textContent='Ton objectif : gagner ta place avec '+country+'.';
+ const profile=document.querySelector('#joueur .profile .muted');
+ if(profile) profile.textContent=flag+' '+country+' · Attaquant · Feyenoord';
+ const selectionCard=document.querySelector('#joueur .grid .card:last-child p');
+ if(selectionCard) selectionCard.textContent='0 sélection · '+country;
+ alert('Équipe nationale choisie : '+flag+' '+country+' !');
+}
+</script>
+</body></html>
